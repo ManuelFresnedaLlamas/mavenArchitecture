@@ -1,28 +1,27 @@
 package org.example;
 
-import org.apache.log4j.Logger;
+import appctr.Appctr;
+import enums.Env;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+@SpringBootApplication
+@ComponentScan(basePackages = {"controller"})
 public class Main {
+
     public static void main(String[] args) {
-
-        Logger logger = Logger.getLogger(Main.class);
-
-        System.out.printf("Launching App!\n");
-        String urlDB = "jdbc:postgresql://localhost:5432/mavenArchitecture";
-        String username = "postgres";
-        String password = "postgres";
-
-        try {
-            Connection connectionDB = DriverManager.getConnection(urlDB, username, password);
-            logger.info("Conexión a la DB con éxito\n");
-        } catch (SQLException e) {
-            logger.info("Falló la conexión con la DB\n");
-            throw new RuntimeException(e);
+        SpringApplication.run(Main.class, args);
+        Appctr appctr = new Appctr();
+        if (appctr.envString == Env.TEST.toString()) {
+            //TODO realizar migraciones
+            //TODO realizar fixtures
+        } else if (appctr.envString == Env.PROD.toString()) {
+            //TODO realizar migracionesProduccion
         }
+
     }
 }
