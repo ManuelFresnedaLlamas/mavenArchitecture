@@ -1,19 +1,28 @@
 package org.example;
 
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Logger logger = Logger.getLogger(Main.class);
 
-            // Press Mayús+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        System.out.printf("Launching App!\n");
+        String urlDB = "jdbc:postgresql://localhost:5432/mavenArchitecture";
+        String username = "postgres";
+        String password = "postgres";
+
+        try {
+            Connection connectionDB = DriverManager.getConnection(urlDB, username, password);
+            logger.info("Conexión a la DB con éxito\n");
+        } catch (SQLException e) {
+            logger.info("Falló la conexión con la DB\n");
+            throw new RuntimeException(e);
         }
     }
 }
