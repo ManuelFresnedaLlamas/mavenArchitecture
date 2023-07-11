@@ -1,0 +1,27 @@
+version: '2.2'
+
+services:
+  db:
+    image: postgres:13
+    container_name: mavenArchitecture-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mavenArchitecture
+    ports:
+      - 5432:5432
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+
+  migrator:
+    build:
+      context: ./dockers/sql-migrate
+    container_name: mavenArchitecture-migrator
+    volumes:
+      - ./migrations:/migrations
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gym
+    depends_on:
+      - db
