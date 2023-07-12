@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE TABLE "auth"
 (
     "id"                 UUID PRIMARY KEY,
@@ -11,6 +10,3 @@ CREATE TABLE "auth"
 
     CONSTRAINT fk_user2auth FOREIGN KEY ("userID") REFERENCES "users" ("id") ON DELETE CASCADE
 );
-
--- +migrate Down
-DROP TABLE "auth";

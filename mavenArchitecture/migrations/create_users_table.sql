@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE TABLE "users"
 (
     "id"        UUID PRIMARY KEY,
@@ -11,6 +10,3 @@ CREATE TABLE "users"
     "disabled"  BOOLEAN      NOT NULL,
     "initPass"  BOOLEAN      NOT NULL
 );
-
--- +migrate Down
-DROP TABLE "users";

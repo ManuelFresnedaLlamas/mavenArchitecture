@@ -11,8 +11,8 @@ import java.util.UUID;
 @RestController
 public class AuthController {
     @GetMapping(value = "/api/auth")
-    public ResponseEntity<Auth> user(){
+    public String user(){
         Auth ret = new Auth("login", "passh", "passs", "passr", 1, UUID.randomUUID());
-        return ResponseEntity.ok(ret);
+        return "Funciona";
     }
 }
