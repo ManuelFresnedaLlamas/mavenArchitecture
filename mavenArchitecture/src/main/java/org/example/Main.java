@@ -40,16 +40,11 @@ public class Main {
 
 
     public static void doMigrations(Appctr appctr) throws IOException, SQLException {
-        String readTable = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/migrations/create_users_table.sql")));
+        //TODO debe recorrer todo el directorio de migrations
+        String readTable = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/migrations/create_auth_table.sql")));
         Statement statement = appctr.db.createStatement();
-        Boolean var = statement.execute(readTable);
-        System.out.println(var);
-        /*
-        if (var){
-            appctr.logger.info("Tabla creada con éxito");
-        } else {
-            appctr.logger.info("Tabla NO CREADA");
-        }*/
+        statement.execute(readTable);
+        appctr.logger.info("Tabla creada con éxito");
         statement.close();
     }
 
