@@ -2,6 +2,8 @@ package org.example;
 
 import appctr.Appctr;
 import enums.Env;
+import fixtures.Fixtures;
+import fixtures.Users;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +22,7 @@ public class Main {
         Appctr appctr = new Appctr();
         if (appctr.envString == Env.localhost.toString()) {
             System.out.println(System.getProperty("user.dir"));
-            doMigrations(appctr);
+            //doMigrations(appctr);
             doFixtures(appctr);
             //TODO realizar fixtures
         } else if (appctr.envString == Env.PROD.toString()) {
@@ -48,7 +50,16 @@ public class Main {
         statement.close();
     }
 
-    public static void doFixtures(Appctr appctr) {
+    public static void doFixtures(Appctr appctr) throws SQLException {
 
+        repositories.Users ru = new repositories.Users(appctr);
+        Users uFtx = new Users(appctr,ru);
+        Fixtures ftx = new Fixtures(uFtx);
+        /* TODO
+        Habra que definir cada repositorio y cada fixtures para cada tipo de dato que se desee
+        Lo suyo sería buscar alguna manera mas elegante de realizar esto
+         */
+
+        ftx.doFixtures();
     }
 }

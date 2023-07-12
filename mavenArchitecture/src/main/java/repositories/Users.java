@@ -66,7 +66,7 @@ public class Users {
         statement.setString(1, UUID.randomUUID().toString());
         statement.setString(2, user.getFirstName());
         statement.setString(3, user.getLastName());
-        statement.setDate(3, (Date) user.getCreatedAt());
+        statement.setDate(4, new java.sql.Date(user.getCreatedAt().getTime()));
         statement.setString(5, user.getEmail());
         statement.setString(6, user.getPhone());
         statement.setString(7, user.getLanguage());
@@ -80,7 +80,7 @@ public class Users {
                 "phone = ?, language = ?, disabled = ?, initPass = ? WHERE id = ?");
         statement.setString(1, user.getFirstName());
         statement.setString(2, user.getLastName());
-        statement.setDate(3, (Date) user.getCreatedAt());
+        statement.setDate(3, new java.sql.Date(user.getCreatedAt().getTime()));
         statement.setString(4, user.getEmail());
         statement.setString(5, user.getPhone());
         statement.setString(6, user.getLanguage());

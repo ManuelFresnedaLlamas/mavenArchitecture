@@ -1,12 +1,12 @@
 CREATE TABLE "auth"
 (
-    "id"                 UUID PRIMARY KEY,
+    "id"                 VARCHAR PRIMARY KEY,
     "login"              VARCHAR(255) UNIQUE NOT NULL,
-    "passwordHash"       VARCHAR(128)        NOT NULL,
-    "passwordSalt"       VARCHAR(64)         NOT NULL,
-    "passwordResetToken" VARCHAR(128),
+    "passwordhash"       VARCHAR(128)        NOT NULL,
+    "passwordsalt"       VARCHAR(64)         NOT NULL,
+    "passwordresettoken" VARCHAR(128),
     "role"               SMALLINT            NOT NULL,
-    "userID"             UUID                NOT NULL,
+    "userid"             UUID                NOT NULL,
 
-    CONSTRAINT fk_user2auth FOREIGN KEY ("userID") REFERENCES "users" ("id") ON DELETE CASCADE
+    CONSTRAINT fk_user2auth FOREIGN KEY ("userid") REFERENCES "users" ("id") ON DELETE CASCADE
 );

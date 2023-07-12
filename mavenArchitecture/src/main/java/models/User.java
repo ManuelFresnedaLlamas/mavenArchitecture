@@ -28,7 +28,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, Date createdAt, String email, String phone, String language, boolean disabled, boolean initPass) {
-        this.id = UUID.randomUUID();
+        this.id = null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.createdAt = new Date();
