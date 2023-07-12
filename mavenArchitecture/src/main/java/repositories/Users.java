@@ -26,13 +26,13 @@ public class Users {
                 resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("language"),
                 resultSet.getBoolean("disabled"), resultSet.getBoolean("initPass"));
     }
-    public User getByID(@NotNull UUID id) throws SQLException {
+    public User getByID(@NotNull String id) throws SQLException {
         PreparedStatement statement = db.prepareStatement("SELECT * FROM " + tableName + " WHERE id = ?");
-        statement.setString(1, id.toString());
+        statement.setString(1, id);
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            createUserFromResultSet(resultSet);
+            return createUserFromResultSet(resultSet);
         }
         return null;
     }
